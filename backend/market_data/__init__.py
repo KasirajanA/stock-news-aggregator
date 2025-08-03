@@ -1,0 +1,1 @@
+# Market Data app for Stock News Aggregator 

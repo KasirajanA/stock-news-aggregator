@@ -1,0 +1,1 @@
+# News app for Stock News Aggregator 
