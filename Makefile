@@ -23,6 +23,7 @@ install: ## Install all dependencies
 	@echo "📦 Installing dependencies..."
 	@npm install
 	@cd frontend && npm install
+	@cd .. && cd backend && pip install -r requirements.txt
 
 build: ## Build frontend for production
 	@echo "🔨 Building frontend..."
