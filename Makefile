@@ -21,9 +21,7 @@ frontend: ## Start React frontend server
 
 install: ## Install all dependencies
 	@echo "📦 Installing dependencies..."
-	@npm install
-	@cd frontend && npm install
-	@cd .. && cd backend && pip install -r requirements.txt
+	@npm run install
 
 build: ## Build frontend for production
 	@echo "🔨 Building frontend..."
