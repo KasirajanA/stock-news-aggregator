@@ -420,9 +420,9 @@ class EconomicTimesScraper(BaseScraper):
                 if href:
                     # Filter for actual article URLs
                     if any(keyword in href for keyword in ['/markets/', '/companies/', '/news/', '/economy/']):
-                    full_url = urljoin(self.source.base_url, href)
+                        full_url = urljoin(self.source.base_url, href)
                         if full_url not in links and 'economictimes.indiatimes.com' in full_url:
-                        links.append(full_url)
+                            links.append(full_url)
         
         return links[:15]
     
@@ -530,9 +530,9 @@ class MoneyControlScraper(BaseScraper):
                 if href:
                     # Filter for actual article URLs
                     if any(keyword in href for keyword in ['/news/', '/markets/', '/business/']):
-                    full_url = urljoin(self.source.base_url, href)
+                        full_url = urljoin(self.source.base_url, href)
                         if full_url not in links and 'moneycontrol.com' in full_url:
-                        links.append(full_url)
+                            links.append(full_url)
         
         return links[:15]
     
@@ -995,7 +995,7 @@ class IndiaTodayScraper(BaseScraper):
             for selector in title_selectors:
                 title_element = soup.select_one(selector)
                 if title_element:
-            title = self.clean_text(title_element.get_text())
+                    title = self.clean_text(title_element.get_text())
                     break
             
             if not title:
