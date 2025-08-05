@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: stock-news-aggregator
+    env: python
+    buildCommand: |
+      pip install -r backend/requirements-light.txt
+      cd frontend && npm install --production && npm run build
+    startCommand: cd backend && python manage.py runserver 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+      - key: NODE_VERSION
+        value: 18.17.0
+    healthCheckPath: /api/v1/health/
+    autoDeploy: true 

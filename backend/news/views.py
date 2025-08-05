@@ -2,6 +2,7 @@
 Views for the news app.
 """
 import time
+import logging
 from django.db.models import Q, Count, F
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
@@ -18,6 +19,8 @@ from .serializers import (
     ArticleSummarySerializer, SearchLogSerializer, ArticleViewSerializer,
     SearchRequestSerializer
 )
+
+logger = logging.getLogger(__name__)
 
 
 class NewsSourceViewSet(viewsets.ReadOnlyModelViewSet):
@@ -128,14 +131,14 @@ class ArticleViewSet(viewsets.ReadOnlyModelViewSet):
                 'processing_time': round(processing_time, 3)
             })
         
-        # Generate summary using AI
+        # Generate summary using lightweight AI
         try:
-            from .summarizer import get_summary_with_stats
+            from .lightweight_summarizer import get_summary_with_stats_lightweight
             
             # Combine title and content for better summarization
             text_to_summarize = f"{article.title}\n\n{article.content}"
             
-            result = get_summary_with_stats(text_to_summarize)
+            result = get_summary_with_stats_lightweight(text_to_summarize)
             
             if result['success']:
                 summary = result['summary']

@@ -1,0 +1,18 @@
+# Django and REST Framework
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+
+# Database and Search
+django-filter==23.3
+
+# Lightweight Text Processing (replaces NLTK)
+textblob==0.17.1
+
+# HTTP Requests for Market Data
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# Environment Variables
+python-dotenv==1.0.0 

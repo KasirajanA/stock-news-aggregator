@@ -136,6 +136,13 @@ stock-news-aggregator/
 
 ## 🚀 Deployment
 
+### Render Free Tier Optimizations
+The application is optimized for Render's free tier with:
+- **Lightweight Dependencies**: TextBlob instead of NLTK (saves 150MB+)
+- **Production Builds**: Disabled sourcemaps for smaller builds
+- **Memory Optimization**: Reduced dependency footprint
+- **Auto-deployment**: Configured with `.render.yaml`
+
 ### Production Build
 ```bash
 # Build frontend
