@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: stock-news-aggregator-backend
+    env: python
+    buildCommand: |
+      pip install -r backend/requirements-ultra-light.txt
+    startCommand: cd backend && python manage.py runserver 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+    healthCheckPath: /api/v1/health/
+    autoDeploy: true 

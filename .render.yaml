@@ -3,13 +3,17 @@ services:
     name: stock-news-aggregator
     env: python
     buildCommand: |
-      pip install -r backend/requirements-light.txt
-      cd frontend && npm install --production && npm run build
+      pip install -r backend/requirements-ultra-light.txt
+      cd frontend && npm install --production && GENERATE_SOURCEMAP=false NODE_OPTIONS='--max-old-space-size=512' npm run build
     startCommand: cd backend && python manage.py runserver 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.16
       - key: NODE_VERSION
         value: 18.17.0
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=512
+      - key: GENERATE_SOURCEMAP
+        value: false
     healthCheckPath: /api/v1/health/
     autoDeploy: true 
