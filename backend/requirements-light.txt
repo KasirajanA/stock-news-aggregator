@@ -12,7 +12,6 @@ textblob==0.17.1
 # HTTP Requests for Market Data
 requests==2.31.0
 beautifulsoup4==4.12.2
-lxml==4.9.3
 feedparser==6.0.11
 
 # Environment Variables
