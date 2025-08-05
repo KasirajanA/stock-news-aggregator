@@ -9,8 +9,9 @@ django-filter==23.3
 # Minimal text processing (no heavy dependencies)
 textblob==0.17.1
 
-# HTTP requests (minimal)
+# HTTP requests and RSS parsing (minimal)
 requests==2.31.0
+feedparser==6.0.10
 
 # Environment
 python-dotenv==1.0.0 

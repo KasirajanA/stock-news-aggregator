@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-stock-news-aggregator-dev-key-change-in-production
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'testserver']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'stock-news-aggregator-backend.onrender.com']
 
 
 # Application definition
