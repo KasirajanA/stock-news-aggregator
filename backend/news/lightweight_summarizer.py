@@ -1,18 +1,17 @@
 """
-Lightweight text summarization using TextBlob (no heavy dependencies).
+Lightweight text summarization using pure Python (no external dependencies).
 """
 import logging
 import re
 from typing import Optional, List
 from django.conf import settings
-from textblob import TextBlob
 from collections import Counter
 
 logger = logging.getLogger(__name__)
 
 
 class LightweightSummarizer:
-    """Lightweight summarizer using TextBlob and frequency-based approach."""
+    """Lightweight summarizer using pure Python and frequency-based approach."""
     
     def __init__(self):
         # Common English stop words (built-in, no external dependency)
@@ -79,7 +78,7 @@ class LightweightSummarizer:
     
     def summarize_text(self, text: str) -> Optional[str]:
         """
-        Generate a summary using TextBlob and frequency-based approach.
+        Generate a summary using pure Python and frequency-based approach.
         
         Args:
             text: The text to summarize
@@ -95,9 +94,8 @@ class LightweightSummarizer:
             # Clean and prepare text
             cleaned_text = self._clean_text(text)
             
-            # Use TextBlob for sentence tokenization
-            blob = TextBlob(cleaned_text)
-            sentences = [str(sentence) for sentence in blob.sentences]
+            # Split into sentences using pure Python
+            sentences = self._split_sentences(cleaned_text)
             
             if len(sentences) < 2:
                 return text
@@ -142,14 +140,42 @@ class LightweightSummarizer:
         
         return text.strip()
     
+    def _split_sentences(self, text: str) -> List[str]:
+        """Split text into sentences using pure Python."""
+        # Simple sentence splitting based on common sentence endings
+        sentence_endings = r'[.!?]+'
+        sentences = re.split(sentence_endings, text)
+        
+        # Clean up sentences
+        cleaned_sentences = []
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if sentence:
+                cleaned_sentences.append(sentence)
+        
+        return cleaned_sentences
+    
+    def _tokenize_words(self, text: str) -> List[str]:
+        """Tokenize text into words using pure Python."""
+        # Convert to lowercase and split on whitespace
+        words = text.lower().split()
+        
+        # Clean words (remove punctuation, keep only alphabetic)
+        cleaned_words = []
+        for word in words:
+            # Remove punctuation from start and end
+            word = word.strip('.,!?;:()[]{}"\'-')
+            if word.isalpha() and word not in self.stop_words:
+                cleaned_words.append(word)
+        
+        return cleaned_words
+    
     def _calculate_word_frequencies(self, sentences: List[str]) -> dict:
         """Calculate word frequencies across all sentences."""
         word_freq = Counter()
         
         for sentence in sentences:
-            # Use TextBlob for word tokenization
-            blob = TextBlob(sentence.lower())
-            words = [word for word in blob.words if word.isalpha() and word not in self.stop_words]
+            words = self._tokenize_words(sentence)
             word_freq.update(words)
         
         return dict(word_freq)
@@ -159,9 +185,7 @@ class LightweightSummarizer:
         sentence_scores = []
         
         for sentence in sentences:
-            # Use TextBlob for word tokenization
-            blob = TextBlob(sentence.lower())
-            words = [word for word in blob.words if word.isalpha() and word not in self.stop_words]
+            words = self._tokenize_words(sentence)
             
             # Calculate score based on word frequencies
             if words:
@@ -202,7 +226,7 @@ class LightweightSummarizer:
             'original_length': original_length,
             'summary_length': summary_length,
             'compression_ratio': round(compression_ratio, 2),
-            'model_used': 'TextBlob (Lightweight)'
+            'model_used': 'Pure Python (Lightweight)'
         }
 
 
